@@ -1,0 +1,4 @@
+# Pretrained and converted checkpoints -- several GB each, so they are never committed.
+# Each src/peft_cir/models/<arch>/README.md says where to get the original release and how
+# to convert it. Anything else here (small configs, mappings) IS tracked.
+pretrained/

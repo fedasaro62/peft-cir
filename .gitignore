@@ -1,0 +1,39 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+.venv-uv/
+env/
+venv/
+.env
+
+# data/, outputs/ and resources/ carry their own .gitignore, next to what each one governs.
+
+# Local working directories, not distributed.
+tests/
+jobs/
+docs/
+
+# Job output (the dir is kept via .gitkeep so --output paths resolve)
+logs/*.out
+!logs/.gitkeep
+
+# Editors
+.idea/
+.vscode/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+site/

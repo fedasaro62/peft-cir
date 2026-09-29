@@ -1,0 +1,20 @@
+numpy
+pandas
+tqdm
+Pillow
+ftfy
+regex
+# CUDA 12.8 build to match the GPU driver (cu13x wheels fall back to CPU)
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+# pinned: the vendored encode_with_pseudo_tokens.py uses text_model.embeddings.position_ids,
+# which newer transformers removed. 4.34.x matches the upstream LinCIR code.
+transformers==4.34.1
+# pinned together: transformers 4.34.1 caps tokenizers at <0.15, which caps huggingface_hub
+# at <0.18, while accelerate >=0.31 imports split_torch_state_dict_into_shards (added in hub
+# 0.23). Leaving either unpinned resolves a trio that crashes on "import peft".
+huggingface_hub==0.17.3
+accelerate==0.30.1
+peft==0.11.1
+git+https://github.com/openai/CLIP.git
