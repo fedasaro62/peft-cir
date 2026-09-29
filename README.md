@@ -59,9 +59,7 @@ comparison is not confounded by a co-trained mapper.
 
 Each model's own notes — how to obtain and convert its checkpoint, and how the port was
 validated against its paper — are in `src/peft_cir/models/<arch>/README.md`, with its training
-hyperparameters beside them in `recipe.sh`. The textual-inversion pair and MTI share one recipe,
-which is what keeps their columns comparable; MagicLens overrides it with its paper's own, for
-reasons that file explains.
+hyperparameters beside them in `recipe.sh`.
 
 ---
 
@@ -69,7 +67,7 @@ reasons that file explains.
 
 `--method` selects the technique and `--target` selects which CLIP tower(s) receive it
 (`text`, `vision` or `text_vision`). The mapping network and the temperature are always
-trainable; `vision` is the ablation arm that leaves the text encoder untouched.
+trainable.
 
 ![The adapted methods. Reparameterisation methods (LoRA, DoRA, VeRA, AdaLoRA) add a low-rank
 branch alongside the frozen weight W; additive methods rescale activations ((IA)³) or insert a
@@ -104,15 +102,6 @@ Every `text_vision` checkpoint is also scored unmodified — no further training
 benchmarks it was *not* trained on: a checkpoint trained on `cirr` is evaluated on `fiq`,
 `shoes` and `circo`, and likewise for the other two. `circo` only ever appears on this side: it
 is eval-only, so no checkpoint is ever trained on it.
-
-### Protocols
-
-Shoes ships no validation split. `--protocol carved` (the default) carves one out of train with
-a seeded, image-disjoint split — whole connected components of the reference/target graph stay
-on one side, so no image appears in both — and reports test once. `--protocol literature`
-instead trains on the full split and selects on **test**, reproducing ARTEMIS, whose released
-code has no val split; those numbers are best-epoch-on-test and optimistic by construction, so
-they are written to a separate `_lit` tree.
 
 ---
 
